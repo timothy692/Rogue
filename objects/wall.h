@@ -5,7 +5,7 @@
 
 class wall : public collidable_object {
     public:
-    wall(position start, position end, int width) {}
+    wall(position start, position end, int width);
 };
 
 #endif
