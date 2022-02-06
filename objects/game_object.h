@@ -1,0 +1,22 @@
+#ifndef __GAME_OBJECT_H
+#define __GAME_OBJECT_H
+
+#include <vector>
+
+#include "../map/tile.h"
+#include "../map/position.h"
+
+class game_object {
+    public:
+    std::vector<tile> map_tiles;
+    position pos;
+    position last_pos;
+    int width, height, ch;
+    game_object(position pos, int width, int height) : pos(pos), width(width), height(height), last_pos(pos) {}
+    virtual void update() = 0;
+    virtual void update_tiles() = 0;
+    void update_key(int ch);
+    bool did_move();
+};
+
+#endif
