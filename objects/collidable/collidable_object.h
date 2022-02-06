@@ -2,7 +2,7 @@
 #define __COLLIDABLE_OBJECT_H
 
 #include "game_object.h"
-#include "../map/position.h"
+#include "position.h"
 
 class collidable_object : public game_object {
     public:
