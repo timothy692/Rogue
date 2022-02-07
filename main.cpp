@@ -1,15 +1,12 @@
 #include <curses.h>
 #include <vector>
 
-#include "objects/game_object.h"
-#include "objects/collidable/collidable_object.h"
-#include "objects/collidable/rogue_player.h"
-#include "objects/room.h"
-#include "objects/grid.h"
-#include "objects/rfloor.h"
+#include "objects/collidable/player.h"
 #include "objects/collidable/wall.h"
-#include "map/renderer.h"
+#include "objects/rfloor.h"
+#include "objects/room.h"
 #include "utils.h"
+#include "game.h"
 
 void init_win() {
   initscr();
@@ -19,51 +16,30 @@ void init_win() {
   refresh();
 }
 
-void print_info(rogue_player *player) {
+void print_info(player *pl) {
     mvprintw(max_y - 2, 2, "X: %d    Y: %d    HP:%.1f(%.1f)", 
-      player->pos.x, player->pos.y, player->get_health(), player->get_maxhealth());
+      pl->pos.x, pl->pos.y, pl->get_health(), pl->get_maxhealth());
 }
 
 int main(void) {
     init_win();
-    renderer render;
-    std::vector<game_object*> objects;
-    std::vector<collidable_object*> collidables;
+    player pl = player(position(0, 0), 20.0f, 20.0f);
+    game g = game(pl);
 
-    rogue_player player = rogue_player(100.0f, 100.0f, position(5, 5));
-    collidables.push_back(&player);
+    wall wa_r = wall(position(6, 0), 1, 7, wall::allignment::vertical);
+    wall wa_b = wall(position(0, 6), 3, 7, wall::allignment::horizontal);
+    rfloor fl = rfloor(position(0, 0), position(5, 5));
 
-    room r = room(position(0, 0), 6, 3);
-    objects.push_back(r.get_floor());
+    g.add_object(&fl);
+    g.add_collidable_object(&wa_r);
+    g.add_collidable_object(&wa_b);
+    g.add_collidable_object(&pl);
 
     int ch;
     while((ch = getch()) != 'q') {
-        for(auto obj : objects) {
-          obj->update_key(ch);
-          obj->update();
-          obj->update_tiles();
+        g.update_objects(ch);
 
-          render.print(obj);
-        }
-
-        for(auto obj : collidables) {
-            obj->update_key(ch);
-            obj->update();
-
-            if(obj->did_move()) {
-              for(auto obj2 : collidables) {
-                if(obj->check_collision(obj2)) {
-                    obj->collide(obj2);
-                    obj2->collide(obj);
-                }
-              }
-            }
-
-            obj->update_tiles();
-            render.print(obj);
-        }
-
-        print_info(&player);
+        print_info(&pl);
     }
 
     endwin();

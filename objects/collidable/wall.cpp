@@ -1,9 +1,17 @@
 #include "wall.h"
 
-wall::wall(position pos, int width, int height): collidable_object(pos, width, height) {
-    for(int y = pos.y; y < pos.y + height + 1; y++) {
+wall::wall(position pos, int width, int height, allignment allign) : collidable_object(pos, width, height) {
+    if(allign == allignment::vertical) {
+        for(int y = pos.y; y < pos.y + height; y++) {
+            for(int x = pos.x; x < pos.x + width; x++) {
+                this->map_tiles.push_back(tile(x, y, TILE_WALL));
+            }
+        }
+    } else {
         for(int x = pos.x; x < pos.x + width; x++) {
-            this->map_tiles.push_back(tile(x, y, TILE_WALL));
+            for(int y = pos.y; y < pos.y + height; y++) {
+                this->map_tiles.push_back(tile(x, y, TILE_WALL));
+            }
         }
     }
 }

@@ -7,12 +7,12 @@
 
 #define TILE_PLAYER '@'
 
-class rogue_player : public collidable_object {
+class player : public collidable_object {
     private:
     float health, maxhealth;
     bool can_move(position pos);
     public:
-    rogue_player(float health, float max_health, position start);
+    player(position pos, float health, float max_health);
     void update() override;
     void update_tiles() override;
     void collide(collidable_object *cobj) override;

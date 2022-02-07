@@ -8,7 +8,7 @@
 class renderer {
     public:
     renderer() {}
-    void print(game_object *obj);
+    void render(game_object *obj);
 };
 
 #endif

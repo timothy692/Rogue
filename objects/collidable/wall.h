@@ -7,7 +7,8 @@
 
 class wall : public collidable_object {
     public:
-    wall(position pos, int width, int height);
+    enum allignment { vertical = 0, horizontal = 1 };
+    wall(position pos, int width, int height, allignment allign);
     void update() override;
     void update_tiles() override;
     void collide(collidable_object *cobj) override;
