@@ -31,50 +31,30 @@ std::vector<tile> room::get_wall_tiles(side s, int corner_s) {
 }
 
 void room::draw_walls() {
-    for(int i = 0; i < 3; i++) {
-        std::vector<tile> tiles = get_wall_tiles((side)i, 0);
-
-        for(int j = 0; j < tiles.size(); j++) {
-            this->map_tiles.push_back(tiles[j]);
-        }   
-    }
-}
-
-void room::draw_doors() {
-    int n_doors = 0;
-
-    do {
-        std::vector<tile> w_tiles = get_wall_tiles((side)randomizer::rnd<int>(0, 3), 1);
-        std::vector<char> tiles_c;
-        for(auto t : w_tiles) {
-            tiles_c.push_back(t.ch);
-        }
-
-        if(!(std::find(tiles_c.begin(), tiles_c.end(), TILE_ROOM_DOOR) != tiles_c.end())) {
-
-            int n = randomizer::rnd<int>(0, w_tiles.size() - 1);
-            tile r_tile = tile(w_tiles[n].x, w_tiles[n].y, TILE_ROOM_DOOR);
-            this->map_tiles.push_back(r_tile);
-            n_doors++;
-        } else {
-            n_doors--;
-        }
-
-    } while(n_doors < DOORS_PER_ROOM);
+    
 }
 
 void room::draw_floor() {
-    for(int y = pos.y + 1; y < pos.y + height - 1; y++) {
-        for(int x = pos.x + 1; x < pos.x + width - 1; x++) {
-            this->map_tiles.push_back(tile(x, y, TILE_ROOM_FLOOR));
-        }
-    }
+    rfloor fl = rfloor(this->pos, position(5, 5));
+    this->room_floor = &fl;
+}
+
+void room::draw_doors() {
+
 }
 
 room::room(position pos, int width, int height) : game_object(pos, width, height) {
-    this->draw_walls();
+    //this->draw_walls();
     this->draw_floor();
-    this->draw_doors();
+    //this->draw_doors();
+}
+
+rfloor *room::get_floor() {
+    return this->room_floor;
+}
+
+std::vector<wall*> room::get_walls() {
+    return this->room_walls;
 }
 
 void room::update() {

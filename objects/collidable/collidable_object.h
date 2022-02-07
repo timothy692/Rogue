@@ -7,7 +7,7 @@
 class collidable_object : public game_object {
     public:
     collidable_object(position pos, int width, int height) : game_object(pos, width, height) {}
-    bool check_collide(collidable_object *cobj);
+    bool check_collision(collidable_object *cobj);
     virtual void collide(collidable_object *cobj) = 0;
 };
 

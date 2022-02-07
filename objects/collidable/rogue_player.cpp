@@ -1,33 +1,33 @@
 #include <curses.h>
 #include <iostream>
 
-#include "player.h"
+#include "rogue_player.h"
 #include "../../utils.h"
 #include "../room.h"
 
-bool player::can_move(position pos) {
+bool rogue_player::can_move(position pos) {
     return !(pos.x >= max_x || pos.x < 0 || pos.y >= max_y || pos.y < 0);
 }
 
-player::player(float health, float max_health) : collidable_object(position(0, 0), 1, 1), 
+rogue_player::rogue_player(float health, float max_health, position start) : collidable_object(start, 2, 2), 
         health(health), max_health(max_health) {
     this->map_tiles.push_back(tile(0, 0, TILE_PLAYER));
     this->last_pos = pos;
 }
 
-void player::update() {
+void rogue_player::update() {
     this->handle_input(this->ch);
 }
 
-void player::update_tiles() {
+void rogue_player::update_tiles() {
     map_tiles[0] = tile(pos.x, pos.y, TILE_PLAYER);
 }
 
-void player::collide(collidable_object *cobj) {
+void rogue_player::collide(collidable_object *cobj) {
     this->pos = this->last_pos;
 }
 
-void player::handle_input(int ch) {
+void rogue_player::handle_input(int ch) {
     position pos(-1, -1);
 
     switch(ch) {
