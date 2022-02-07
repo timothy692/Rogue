@@ -7,6 +7,6 @@ bool collidable_object::check_collide(collidable_object *cobj) {
          (this->pos.y <= (cobj->pos.y + cobj->height - 1));
 }
 
-void collidable_object::on_collide(collidable_object *cobj) {
+void collidable_object::collide(collidable_object *cobj) {
   
 }

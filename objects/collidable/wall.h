@@ -3,10 +3,14 @@
 
 #include "collidable_object.h"
 
+#define TILE_WALL '#'
+
 class wall : public collidable_object {
     public:
-    wall(position pos, int width, int height) : collidable_object(pos, width, height) {}
-    void on_collide(collidable_object *cobj) override;
+    wall(position pos, int width, int height);
+    void update() override;
+    void update_tiles() override;
+    void collide(collidable_object *cobj) override;
 };
 
 #endif

@@ -2,9 +2,11 @@
 #include <vector>
 
 #include "objects/game_object.h"
-#include "objects/player.h"
+#include "objects/collidable/collidable_object.h"
+#include "objects/collidable/player.h"
 #include "objects/room.h"
 #include "objects/grid.h"
+#include "objects/collidable/wall.h"
 #include "map/renderer.h"
 #include "utils.h"
 
@@ -28,16 +30,16 @@ int main(void) {
     init_win();
     renderer render;
     std::vector<game_object*> objects;
+    std::vector<collidable_object*> collidables;
+
     grid background = grid(max_x, max_y);
-    player rogue_player = player(100.0f, 100.0f);
-
-    room room1 = room(position(15, 15), 20, 10);
-    room room2 = room(position(52, 22), 15, 7);
-
     objects.push_back(&background);
-    objects.push_back(&room1);
-    objects.push_back(&room2);
-    objects.push_back(&rogue_player);
+
+    wall w = wall(position(15, 10), 3, 10);
+    collidables.push_back(&w);
+
+    player rogue_player = player(100.0f, 100.0f);
+    collidables.push_back(&rogue_player);
 
     int ch;
     while((ch = getch()) != 'q') {
@@ -47,6 +49,23 @@ int main(void) {
           obj->update_tiles();
 
           render.print(obj);
+        }
+
+        for(auto obj : collidables) {
+            obj->update_key(ch);
+            obj->update();
+
+            if(obj->did_move()) {
+              for(auto obj2 : collidables) {
+                if(obj->check_collide(obj2)) {
+                    obj->collide(obj2);
+                    obj2->collide(obj);
+                }
+              }
+            }
+
+            obj->update_tiles();
+            render.print(obj);
         }
 
         print_info(&rogue_player);

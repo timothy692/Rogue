@@ -13,7 +13,9 @@ class game_object {
     position last_pos;
     int width, height, ch;
     game_object(position pos, int width, int height) : pos(pos), width(width), height(height), last_pos(pos) {}
+    /* Called on each game tick */
     virtual void update() = 0;
+    /* Called after update(), updating tiles should be done within this function */
     virtual void update_tiles() = 0;
     void update_key(int ch);
     bool did_move();
