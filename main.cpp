@@ -8,6 +8,9 @@
 #include "utils.h"
 #include "game.h"
 
+#define STR_COLOR_XY 255
+#define STR_COLOR_HP 196
+
 void init_win() {
   initscr();
   noecho();
@@ -17,8 +20,9 @@ void init_win() {
 }
 
 void print_info(player *pl) {
-    mvprintw(max_y - 2, 2, "X: %d    Y: %d    HP:%.1f(%.1f)", 
-      pl->pos.x, pl->pos.y, pl->get_health(), pl->get_maxhealth());
+    mvprintw(max_y - 2, 2, "X: %d", pl->pos.x);
+    printw("    Y: %d", pl->pos.y);
+    printw("    HP: %.1f(%.1f)", pl->get_health(), pl->get_maxhealth());
 }
 
 int main(void) {
@@ -26,8 +30,8 @@ int main(void) {
     player pl = player(position(0, 0), 20.0f, 20.0f);
     game g = game(pl);
 
-    wall wa_r = wall(position(6, 0), 1, 7, wall::allignment::vertical);
-    wall wa_b = wall(position(0, 6), 1, 7, wall::allignment::horizontal);
+    wall wa_r = wall(position(0, 6), 7, 1, wall::allignment::vertical);
+    wall wa_b = wall(position(6, 0), 1, 7, wall::allignment::horizontal);
     rfloor fl = rfloor(position(0, 0), position(5, 5));
 
     g.add_object(&fl);
