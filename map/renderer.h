@@ -6,8 +6,14 @@
 #include "../objects/game_object.h"
 
 class renderer {
+    private:
+    struct colored_tile { 
+        
+    };
+    std::vector<short> color_pairs; 
+    int find_pair_index(short color);
     public:
-    renderer() {}
+    renderer();
     void render(game_object *obj);
 };
 

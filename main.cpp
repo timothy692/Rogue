@@ -27,7 +27,7 @@ int main(void) {
     game g = game(pl);
 
     wall wa_r = wall(position(6, 0), 1, 7, wall::allignment::vertical);
-    wall wa_b = wall(position(0, 6), 3, 7, wall::allignment::horizontal);
+    wall wa_b = wall(position(0, 6), 1, 7, wall::allignment::horizontal);
     rfloor fl = rfloor(position(0, 0), position(5, 5));
 
     g.add_object(&fl);

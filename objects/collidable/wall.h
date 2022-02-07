@@ -3,6 +3,7 @@
 
 #include "collidable_object.h"
 
+#define TILE_WALL_COLOR 196 
 #define TILE_WALL '#'
 
 class wall : public collidable_object {

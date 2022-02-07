@@ -9,7 +9,7 @@ bool player::can_move(position pos) {
     return !(pos.x >= max_x || pos.x < 0 || pos.y >= max_y || pos.y < 0);
 }
 
-player::player(position pos, float health, float max_health) : collidable_object(pos, 1, 1), 
+player::player(position pos, float health, float max_health) : collidable_object(pos, 1, 1, TILE_PLAYER_COLOR), 
         health(health), maxhealth(max_health) {
     this->map_tiles.push_back(tile(0, 0, TILE_PLAYER));
     this->last_pos = pos;

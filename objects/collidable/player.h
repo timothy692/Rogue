@@ -5,6 +5,7 @@
 #include "../../map/position.h"
 #include "../../map/tile.h"
 
+#define TILE_PLAYER_COLOR 46
 #define TILE_PLAYER '@'
 
 class player : public collidable_object {

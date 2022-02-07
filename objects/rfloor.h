@@ -3,6 +3,7 @@
 
 #include "game_object.h"
 
+#define TILE_FLOOR_COLOR 253
 #define TILE_FLOOR '.'
 
 class rfloor : public game_object {

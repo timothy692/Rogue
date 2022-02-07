@@ -43,7 +43,7 @@ void room::draw_doors() {
 
 }
 
-room::room(position pos, int width, int height) : game_object(pos, width, height) {
+room::room(position pos, int width, int height) : game_object(pos, width, height, -1) {
     //this->draw_walls();
     this->draw_floor();
     //this->draw_doors();
