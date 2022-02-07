@@ -14,7 +14,9 @@ class game {
     std::vector<collidable_object*> collidable_game_objects;
     public:
     game(rogue_player player);
-    
+    void add_collidable_object(collidable_object *cobject);
+    void add_object(game_object *object);
+    void update_objects();
 };
 
 #endif

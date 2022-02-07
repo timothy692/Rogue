@@ -21,7 +21,7 @@ void init_win() {
 
 void print_info(rogue_player *player) {
     mvprintw(max_y - 2, 2, "X: %d    Y: %d    HP:%.1f(%.1f)", 
-      player->pos.x, player->pos.y, player->health, player->max_health);
+      player->pos.x, player->pos.y, player->get_health(), player->get_maxhealth());
 }
 
 int main(void) {
@@ -31,7 +31,7 @@ int main(void) {
     std::vector<collidable_object*> collidables;
 
     rogue_player player = rogue_player(100.0f, 100.0f, position(5, 5));
-    collidables.push_back(&rogue_player);
+    collidables.push_back(&player);
 
     room r = room(position(0, 0), 6, 3);
     objects.push_back(r.get_floor());
@@ -63,7 +63,7 @@ int main(void) {
             render.print(obj);
         }
 
-        print_info(&rogue_player);
+        print_info(&player);
     }
 
     endwin();

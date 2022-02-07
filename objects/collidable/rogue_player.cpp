@@ -10,7 +10,7 @@ bool rogue_player::can_move(position pos) {
 }
 
 rogue_player::rogue_player(float health, float max_health, position start) : collidable_object(start, 2, 2), 
-        health(health), max_health(max_health) {
+        health(health), maxhealth(max_health) {
     this->map_tiles.push_back(tile(0, 0, TILE_PLAYER));
     this->last_pos = pos;
 }
@@ -59,4 +59,12 @@ void rogue_player::handle_input(int ch) {
         this->last_pos = this->pos;
         this->pos = pos;
     }
+}
+
+float rogue_player::get_health() {
+    return this->health;
+}
+
+float rogue_player::get_maxhealth() {
+    return this->maxhealth;
 }

@@ -9,14 +9,16 @@
 
 class rogue_player : public collidable_object {
     private:
+    float health, maxhealth;
     bool can_move(position pos);
     public:
-    float health, max_health;
     rogue_player(float health, float max_health, position start);
     void update() override;
     void update_tiles() override;
     void collide(collidable_object *cobj) override;
     void handle_input(int ch);
+    float get_health();
+    float get_maxhealth();
 };
 
 #endif
