@@ -9,7 +9,7 @@ wall::wall(position pos, int width, int height): collidable_object(pos, width, h
 }
 
 void wall::update() {
-
+    
 }
 
 void wall::update_tiles() {
