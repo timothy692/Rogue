@@ -5,10 +5,12 @@ game::game(player pl) {
 }
 
 void game::add_collidable_object(collidable_object *cobject) {
+    cobject->init();
     this->collidable_game_objects.push_back(cobject);
 }
 
 void game::add_object(game_object *object) {
+    object->init();
     this->game_objects.push_back(object);
 }
 

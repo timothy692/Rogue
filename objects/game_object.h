@@ -11,9 +11,10 @@ class game_object {
     std::vector<tile> map_tiles;
     position pos;
     position last_pos;
-    unsigned short color; 
     int width, height, ch;
-    game_object(position pos, int width, int height, unsigned short color) : pos(pos), width(width), height(height), last_pos(pos), color(color) {}
+    game_object(position pos, int width, int height) : pos(pos), width(width), height(height), last_pos(pos) {}
+    /* add game object tiles to the tile map */
+    virtual void init() = 0;
     /* called on each game tick */
     virtual void update() = 0;
     /* called after update(), updating tiles should be done within this function */

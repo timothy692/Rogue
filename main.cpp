@@ -4,7 +4,8 @@
 #include "objects/collidable/player.h"
 #include "objects/collidable/wall.h"
 #include "objects/rfloor.h"
-#include "objects/room.h"
+#include "objects/collections/room.h"
+#include "objects/door.h"
 #include "utils.h"
 #include "game.h"
 
@@ -27,16 +28,33 @@ void print_info(player *pl) {
 
 int main(void) {
     init_win();
-    player pl = player(position(0, 0), 20.0f, 20.0f);
+    player pl = player(position(7, 7), 20.0f, 20.0f);
     game g = game(pl);
 
-    wall wa_r = wall(position(0, 6), 7, 1, wall::allignment::vertical);
-    wall wa_b = wall(position(6, 0), 1, 7, wall::allignment::horizontal);
-    rfloor fl = rfloor(position(0, 0), position(5, 5));
+    /*int width = 10, height = 5;
+    position tl = position(12, 8);
 
-    g.add_object(&fl);
-    g.add_collidable_object(&wa_r);
-    g.add_collidable_object(&wa_b);
+    door d = door(position(tl.x + (width / 2), tl.y + height - 1), 1, 1);
+
+    wall wa_top = wall(tl, width, 1);
+    wall wa_left = wall(tl, 1, height);
+    wall wa_right = wall(tl + position(width - 1, 0), 1, height);
+    
+    wall wa_bottom_l = wall(tl + position(0, height - 1), (width / 2), 1);
+    wall wa_bottom_r = wall(tl + position((width / 2) + 1, height - 1), (width / 2) - 1, 1);
+
+    rfloor flo = rfloor(tl + position(1, 1), position(position(tl.x + width - 2, tl.y + height - 2)));
+
+    g.add_object(&flo);
+    g.add_object(&d);
+    g.add_collidable_object(&wa_top);
+    g.add_collidable_object(&wa_left);
+    g.add_collidable_object(&wa_right);
+    g.add_collidable_object(&wa_bottom_l);
+    g.add_collidable_object(&wa_bottom_r);*/
+
+    room r = room(position(5, 5), 10, 5);
+    g.add_object(&r);
     g.add_collidable_object(&pl);
 
     int ch;

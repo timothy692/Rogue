@@ -5,7 +5,6 @@
 #include "../../map/position.h"
 #include "../../map/tile.h"
 
-#define TILE_PLAYER_COLOR 46
 #define TILE_PLAYER '@'
 
 class player : public collidable_object {
@@ -14,6 +13,7 @@ class player : public collidable_object {
     bool can_move(position pos);
     public:
     player(position pos, float health, float max_health);
+    void init() override;
     void update() override;
     void update_tiles() override;
     void collide(collidable_object *cobj) override;

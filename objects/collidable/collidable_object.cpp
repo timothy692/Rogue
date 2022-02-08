@@ -1,4 +1,5 @@
 #include "collidable_object.h"
+#include "wall.h"
 
 bool collidable_object::check_collision(collidable_object *cobj) {
     return this != cobj && (this->pos.x >= cobj->pos.x) &&
