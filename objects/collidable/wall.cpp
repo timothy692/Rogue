@@ -3,8 +3,8 @@
 wall::wall(position pos, int width, int height) : collidable_object(pos, width, height) {}
 
 void wall::init() {
-    for(int y = pos.y; y < pos.y + height; y++) {
-        for(int x = pos.x; x < pos.x + width; x++) {
+    for(int y = pos.y; y < (pos.y + height); y++) {
+        for(int x = pos.x; x < (pos.x + width); x++) {
             this->map_tiles.push_back(tile(x, y, TILE_WALL));
         }
     }

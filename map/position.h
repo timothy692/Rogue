@@ -9,6 +9,9 @@ class position {
     bool operator==(const position other);
     bool operator!=(const position other);
     position operator+(const position other);
+    position operator-(const position other);
+    bool operator<(const position other);
+    bool operator <=(const position other);
 };
 
 #endif

@@ -21,14 +21,14 @@ void init_win() {
 }
 
 void print_info(player *pl) {
-    mvprintw(max_y - 2, 2, "X: %d", pl->pos.x);
-    printw("    Y: %d", pl->pos.y);
+    mvprintw(max_y - 2, 2, "X: %d(%d)", pl->pos.x, max_x);
+    printw("    Y: %d(%d)", pl->pos.y, max_y);
     printw("    HP: %.1f(%.1f)", pl->get_health(), pl->get_maxhealth());
 }
 
 int main(void) {
     init_win();
-    player pl = player(position(7, 7), 20.0f, 20.0f);
+    player pl = player(position(0, 0), 20.0f, 20.0f);
     game g = game(pl);
 
     /*int width = 10, height = 5;
@@ -53,8 +53,9 @@ int main(void) {
     g.add_collidable_object(&wa_bottom_l);
     g.add_collidable_object(&wa_bottom_r);*/
 
-    room r = room(position(5, 5), 10, 5);
-    g.add_object(&r);
+    room r = room(position(5, 5), 10, 10);
+
+    g.add_collective_object(&r);
     g.add_collidable_object(&pl);
 
     int ch;
